@@ -1,0 +1,103 @@
+<resources>
+    <string name="app_name">云存储</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <!--支持的所有操作-->
+    <!-- 查看-->
+    <string name="action_share">分享</string>
+    <string name="action_search">搜索</string>
+    <string name="action_select_all">全选</string>
+    <string name="action_sort">排序</string>
+    <string name="action_gridview">网格视图</string>
+    <string name="action_listview">列表视图</string>
+    <string name="action_unselect_all">全不选</string>
+    <string name="action_grid_thumbnail">缩略图</string>
+    <string name="action_download">下载</string>
+    <string name="action_open">打开</string>
+    <string name="action_details">详情</string>
+    <string name="action_license">版权</string>
+    <!--增加-->
+    <string name="action_create_dir">新建目录</string>
+    <string name="action_upload">上传</string>
+    <string name="action_take_photo">拍照</string>
+    <string name="action_record_video">录像</string>
+    <string name="action_record_audio">录音</string>
+    <string name="action_record_download">下载</string>
+    <!--删除-->
+    <string name="action_recycle">删除</string>
+    <string name="action_restore">还原</string>
+    <string name="action_empty">清空</string>
+    <!--修改-->
+    <string name="action_copy">复制</string>
+    <string name="action_move">移动</string>
+    <string name="action_rename">重命名</string>
+    <string name="action_settings">设置</string>
+
+    <!-- 导航-->
+    <string name="menu_swiftdisk">所有</string>
+    <string name="menu_doc">文档</string>
+    <string name="menu_pic">图片</string>
+    <string name="menu_music">音乐</string>
+    <string name="menu_video">视频</string>
+    <string name="menu_gridview">网格视图</string>
+    <string name="menu_video_gridview">视频网格视图</string>
+    <string name="menu_image_gridview">图片网格视图</string>
+    <string name="menu_recycle">回收站</string>
+    <string name="menu_share">分享</string>
+    <!-- 分享-->
+    <string name="sort_name">按名称排序</string>
+    <string name="sort_time">按时间排序</string>
+    <string name="sort_size">按大小排序</string>
+
+    <string name="login_hint_username">账户</string>
+    <string name="login_hint_password">密码</string>
+    <string name="login_button">登录</string>
+    <string name="login_email">邮箱</string>
+    <string name="register_button">注册</string>
+    <string name="title_activity_login">登录</string>
+
+    <string name="action_confirm">确定</string>
+    <string name="action_cancel">取消</string>
+
+    <string name="alert_successful">设置成功!</string>
+    <string name="title_swift_IP">请输入云存储服务IP</string>
+
+    <string name="alert_title_login_auth">账户认证</string>
+    <string name="alert_error_login_auth_user_password">认证错误，请重新输入账户和密码!</string>
+
+    <string name="alert_title_login_get_tenant">获取租户</string>
+    <string name="alert_error_login_get_tenant">获取租户错误，租户名称和用户名称一致，请核对!</string>
+    <string name="alert_error_login_set_tenant">创建租户失败</string>
+    <string name="alert_error_login_set_user">创建用户失败</string>
+    <string name="alert_error_login_set_role">创建角色失败</string>
+    <string name="set_seccess">注册成功</string>
+
+    <string name="alert_title_login_get_container">获取容器</string>
+    <string name="alert_error_login_get_container">获取容器错误，容器名称和用户名称一致，请核对!</string>
+
+    <string name="alert_title_login_create_container">创建容器</string>
+    <string name="alert_error_login_create_container">创建容器错误，容器名称和用户名称一致，请核对!</string>
+
+    <string name="alert_error_get_objects">获取容器对象错误</string>
+    <string name="alert_error_rename_no_selected">"请先选择文件或目录"</string>
+
+    <string name="alert_confirm_exit">再按一次返回键回到桌面</string>
+    <string name="alert_take_photo_fail">再按一次返回键回到桌面</string>
+    <string name="title_activity_welcome_splash">WelcomeSplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+    <string name="action_upload_finished">上传完成</string>
+    <string name="action_download_finished">下载完成</string>
+    <string name="action_search_info">搜索名称为...</string>
+    <string name="error_unkown_content_type">未知类型</string>
+    <string name="error_create_dir_fail">创建目录失败</string>
+    <string name="title_dialog_create_dir">请输入文件夹名称</string>
+    <string name="title_dialog_rename">请输入新名称</string>
+    <string name="error_dlg">Fehlermeldung</string>
+
+
+</resources>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item android:id="@+id/action_search"
+        android:title="@string/action_search"
+        android:icon="@drawable/ic_action_search"
+        android:visible="true"
+        app:showAsAction="collapseActionView|always"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:layout_width="wrap_content" />
+    <item android:id="@+id/action_sort"
+        android:title="@string/action_sort"
+        android:visible="true"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_action_sort"
+        android:layout_width="wrap_content" />
+    <item android:id="@+id/action_share"
+        android:title="@string/action_share"
+        android:icon="@drawable/ic_action_share"
+        android:visible="true"
+        app:showAsAction="collapseActionView|always"
+        android:layout_width="wrap_content" />
+
+    <item
+        android:id="@+id/action_select_all"
+        android:icon="@drawable/ic_action_select_all"
+        android:title="@string/action_select_all"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_unselect_all"
+        android:icon="@drawable/ic_action_unselect_all"
+        android:title="@string/action_unselect_all"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_create_dir"
+        android:icon="@drawable/ic_action_create_dir"
+        android:title="@string/action_create_dir"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_download"
+        android:title="@string/action_download"
+        android:visible="true"
+        android:icon="@drawable/ic_action_download"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_upload"
+        android:icon="@drawable/ic_action_upload"
+        android:title="@string/action_upload"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_take_photo"
+        android:icon="@drawable/ic_action_take_photo"
+        android:title="@string/action_take_photo"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_record_video"
+        android:icon="@drawable/ic_action_record_video"
+        android:title="@string/action_record_video"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_record_audio"
+        android:icon="@drawable/ic_action_record_audio"
+        android:title="@string/action_record_audio"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_rename"
+        android:icon="@drawable/ic_action_rename"
+        android:title="@string/action_rename"
+        android:visible="true"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_copy"
+        android:icon="@drawable/ic_action_copy"
+        android:title="@string/action_copy"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_move"
+        android:icon="@drawable/ic_action_move"
+        android:title="@string/action_move"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_recycle"
+        android:icon="@drawable/ic_action_recycle"
+        android:title="@string/action_recycle"
+        android:visible="true"
+        app:showAsAction="never" />
+
+
+
+
+    <item
+        android:id="@+id/action_details"
+        android:icon="@drawable/ic_action_details"
+        android:title="@string/action_details"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_restore"
+        android:title="@string/action_restore"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_empty"
+        android:title="@string/action_empty"
+        android:visible="true"
+        app:showAsAction="never" />
+</menu>

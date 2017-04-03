@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_swiftdisk"
+            android:icon="@drawable/ic_menu_swiftstorage"
+            android:title="@string/menu_swiftdisk" />
+        <item
+            android:id="@+id/nav_doc"
+            android:icon="@drawable/ic_menu_doc"
+            android:title="@string/menu_doc" />
+        <item
+            android:id="@+id/nav_pic"
+            android:icon="@drawable/ic_menu_pic"
+            android:title="@string/menu_pic" />
+        <item
+            android:id="@+id/nav_music"
+            android:icon="@drawable/ic_menu_music"
+            android:title="@string/menu_music" />
+        <item
+            android:id="@+id/nav_video"
+            android:icon="@drawable/ic_menu_video"
+            android:title="@string/menu_video" />
+
+        <item
+            android:id="@+id/nav_recycle"
+            android:icon="@drawable/ic_menu_recycle"
+            android:title="@string/menu_recycle" />
+    </group>
+
+
+
+</menu>
