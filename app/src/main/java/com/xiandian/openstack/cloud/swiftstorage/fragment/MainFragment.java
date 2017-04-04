@@ -571,6 +571,47 @@ public class MainFragment extends Fragment
 
     @Override
     public void rename(String oldFilePath, String newFilePath) {
+        final EditText editText = new EditText(getContext());
+        final String oldPath = getFirstSelected().getName();
+        final String contentType = getFirstSelected().getContentType();
+        final boolean isFile = getFirstSelected().isFile();
+        String patentPath = getFirstSelected().getParent().getName();
+
+        Log.e("TAG" ,patentPath);
+        Log.e("TAGCONTENT",contentType);
+        new AlertDialog.Builder(getActivity())
+                .setTitle("重命名")
+                .setView(editText)
+                .setPositiveButton("确定", new android.content.DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0 , int arg1) {
+                        final String name = editText.getText().toString();
+                        if (!name.isEmpty()) {
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String cotainerName = getAppState().getSelectedContainer().getName();
+                                    String dirName = null;
+                                    if (isFile){
+                                        dirName = name;
+                                    }else {
+                                        dirName = name+"/";
+                                    }
+                                    OpenStackClientService.getInstance()
+                                            .rename(cotainerName,oldPath,dirName,contentType);
+                                }
+                            }).start();
+
+                        }else {
+                            Toast.makeText(getActivity(),"请重新输入！", Toast.LENGTH_SHORT) .show();
+                    }
+                    }
+
+                }).setNegativeButton("取消", null).show();
+
+
+
+
 
     }
 
