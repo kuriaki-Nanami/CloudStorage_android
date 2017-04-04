@@ -569,6 +569,9 @@ public class MainFragment extends Fragment
 
     }
 
+    /**
+     * 重命名功能的实现
+     */
     @Override
     public void rename(final String oldFilePath, String newFilePath) {
         final EditText editText =new EditText(getContext()) ;
