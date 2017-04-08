@@ -508,41 +508,137 @@ public class MainFragment extends Fragment
 
     }
 
-    /**新建文件夹
-     *
-     *
-     *
+    /**
+     * 新建文件夹
      */
-    @Override
-    public void createDir(String filePath) {
-        final EditText editText = new EditText(getContext());
-        new AlertDialog.Builder(getActivity())
-                .setTitle("新建文件夹")
-                .setView(editText)
-                .setPositiveButton("确定", new android.content.DialogInterface.OnClickListener() {
+    private AlertDialog createDirDialog;
 
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1 ) {
-                        final String name = editText.getText() .toString();
-                        if (!name.isEmpty()) {
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    String containerName = getAppState().getSelectedContainer().getName();
-                                    String dirName = name+"/";
-                                    OpenStackClientService.getInstance()
-                                            .createDirectory(containerName,dirName);
-                                }
-                            }).start();
-                        }else {
-                            Toast.makeText(getActivity(),"请输入文件名",Toast.LENGTH_SHORT) .show();
-                        }
-                    }
-                }).setNegativeButton("取消", null).show();
 
-        refresh();
+
+//UI部分
+
+    /**
+     * 创建目录 弹出对话框，用户输入当前目录的文件夹名称 不要含有"/"
+     */
+    private void createDir() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        //文本输入框 确定和取消
+        View view = inflater.inflate(R.layout.input_text_edit_dialog,null);
+        view.findViewById(R.id.btnEnter).setOnClickListener(new View.OnClickListener(){
+
+            @Override
+
+            public void onClick(View v) {
+
+                //获取输入内容
+                EditText editText = (EditText) createDirDialog.findViewById(R.id.edit_text);
+                //注意检查！如果输入有特殊字符将导致无法创建（swift path,resful URL规范）
+
+                //开始创建
+
+                String dirName = null;
+
+                try {
+                    dirName = URLDecoder.decode(editText.getText().toString(),"UTF-8");
+
+                }catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+
+                }
+
+                //启动任务
+                CreateDirectoryTask createDirectoryTask = new CreateDirectoryTask(dirName);
+                createDirectoryTask.execute();
+
+                //成功后关闭
+                createDirDialog.dismiss();
+
+            }
+        });
+        view.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener(){
+            @Override
+
+            public void onClick(View v) {
+
+                //取消关闭
+                createDirDialog.cancel();
+            }
+        });
+
+        builder.setTitle(R.string.title_dialog_create_dir);
+        builder.setView(view);
+        createDirDialog = builder.create();
+        createDirDialog.show();
 
     }
+//Task
+
+
+    /**
+     * 创建文件夹 在当前目录之下
+     */
+    private class CreateDirectoryTask extends AsyncTask<String, Object,TaskResult<SFile>> {
+
+
+        /**
+         * 目录名称 不带路径
+         */
+        private  String folderName;
+
+
+        /**
+         * 当前目录下创建子目录
+         * @param folderName
+         */
+        private CreateDirectoryTask(String folderName) {//这个名字是乱码的么qwq 是的√
+
+            //创建目录 默认加"/"
+            this.folderName = folderName;
+            if (!folderName.endsWith("/")) {
+                this .folderName += "/";
+
+            }
+
+        }
+
+        protected TaskResult<SFile> doInBackground(String... params) {
+
+            try {
+
+                //当前目录的路径
+                String path = getAppState().getSelectedDirectory().getName().toString();
+                if (path.equals("/")){
+                    path = "";
+                }
+                path += folderName;
+
+                //创建目录下带有path
+                getService().createDirectory(getAppState().getSelectedContainer().getName().toString(),path);
+
+                //TODO: 直接更新文件系统，避免重新获取。
+
+                return new TaskResult<SFile>(getAppState().getSelectedDirectory());
+
+
+            } catch (Exception e) {
+                return  new TaskResult<SFile>(e);
+
+            }
+        }
+
+
+
+        protected void onPostExecute(TaskResult<SFile> result) {
+            super.onPostExecute(result);
+            if (result.isValid()) {
+
+            }
+        }
+    }
+
 
     @Override
     public void upload() {
