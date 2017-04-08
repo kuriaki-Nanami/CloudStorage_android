@@ -569,47 +569,8 @@ public class MainFragment extends Fragment
 
     }
 
-    /**
-     * 重命名功能的实现
-     */
     @Override
-    public void rename(final String oldFilePath, String newFilePath) {
-        final EditText editText =new EditText(getContext()) ;
-        final String oldpath = getFirstSelected().getName();
-        final String contentType =getFirstSelected().getContentType();
-        final boolean isFile = getFirstSelected().isFile();
-        String patentPath = getFirstSelected().getParent().getName();
-
-        Log.e("TAG",patentPath);
-        Log.e("TAGCONTENT",contentType);
-        new  AlertDialog.Builder(getActivity())
-                .setTitle("重命名")
-                .setView(editText)
-                .setPositiveButton("确定", new android.content.DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        final  String name =editText.getText().toString();
-                        if (!name.isEmpty()) {
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    String ContainerName = getAppState().getSelectedContainer().getName();
-                                    String dirName = null;
-                                    if (isFile) {
-                                        dirName =name+"/";
-
-                                    }
-
-                                    OpenStackClientService.getInstance()
-                                            .rename(ContainerName,oldFilePath,dirName,contentType);
-                                }
-                            }).start();
-                        }else {
-                            Toast.makeText(getActivity(),"请输入文件名",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).setNegativeButton("取消", null).show();
+    public void rename(String oldFilePath, String newFilePath) {
 
     }
 
