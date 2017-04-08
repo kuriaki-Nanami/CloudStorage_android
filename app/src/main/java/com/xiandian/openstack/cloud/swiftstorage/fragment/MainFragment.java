@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -70,6 +69,37 @@ import java.util.List;
  *
  * @author 云计算应用与开发项目组
  * @since  V1.0
+ *
+ * /**
+ *                _ooOoo_
+ *               o8888888o
+ *               88" . "88
+ *               (| -_- |)
+ *               0\  =  /0
+ *            ____/`---'\____
+ *          .'    \\| |//   `.
+ *         /   \\||| : |||//  \
+ *        /  _||||| -:- |||||- \
+ *       | |    \\\  -  ///  | |
+ *      | \_|    ''\---/''   | |
+ *      \  .-  \__  `-` ___/-. /
+ *       ___`. .' /--.--\ `. . __
+ *    ."" '< `.___\_<|>_/___.' >'"".
+ *    | | : `- \`.;`\ _ /`;.`/-` : |
+ *    \ \ `-. \_ __\ /__ _/ .-` / /
+ * ======`-.____`-.___\_____/___.-`____.-'======
+ *                `=---='
+ * ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ * 佛祖保佑 永无BUG
+ * 佛曰:
+ * 写字楼里写字间，写字间里程序员；
+ * 程序人员写程序，又拿程序换酒钱。
+ * 酒醒只在网上坐，酒醉还来网下眠；
+ * 酒醉酒醒日复日，网上网下年复年。
+ * 但愿老死电脑间，不愿鞠躬老板前；
+ * 奔驰宝马贵者趣，公交自行程序员。
+ * 别人笑我忒疯癫，我笑自己命太贱；
+ * 不见满街漂亮妹，哪个归得程序员？
  */
 public class MainFragment extends Fragment
         implements OnRefreshListener, SFileListViewAdapter.ItemClickCallable, SFileEditable {
@@ -508,6 +538,131 @@ public class MainFragment extends Fragment
 
     }
 
+    @Override
+    public void createDir(String filePath) {
+
+    }
+
+    @Override
+    public void upload() {
+
+    }
+
+    @Override
+    public void download() {
+
+    }
+
+    @Override
+    public void takePhoto() {
+
+    }
+
+    @Override
+    public void recordvideo() {
+
+    }
+
+    @Override
+    public void recordaudio() {
+
+    }
+
+    @Override
+    public void rename(String oldFilePath, String newFilePath) {
+
+    }
+
+    @Override
+    public void copy(String fromPath, String toPath) {
+
+    }
+
+    @Override
+    public void move(String fromPath, String toPath) {
+
+    }
+
+    @Override
+    public void recycle(String filePath) {
+
+    }
+
+    @Override
+    public void sort() {
+
+    }
+
+    @Override
+    public void details(int type, boolean ascend) {
+
+    }
+
+
+    /**
+     * 刷新当前视口。
+     */
+    public void refresh() {
+        fillListView();
+    }
+
+    @Override
+    public void restroe() {
+
+    }
+
+    @Override
+    public void empty() {
+
+    }
+
+    /**
+     * 获取选择的文件或目录。
+     *
+     * @return
+     */
+    private List<SFile> getSelectedFiles() {
+        ArrayList<SFile> selected = new ArrayList<SFile>();
+        for (SFileData fd : fileListData) {
+            if (fd.isChecked()) {
+                selected.add(fd.isFolder() ? swiftFolders.get(fd.getIndex()) : swiftFiles.get(fd.getIndex()));
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 获取选择的文件或目录。
+     *
+     * @return
+     */
+    private SFile getFirstSelectedFile() {
+        ArrayList<SFile> selected = new ArrayList<SFile>();
+        for (SFileData fd : fileListData) {
+            if (fd.isChecked() && !fd.isFolder()) {
+                return swiftFiles.get(fd.getIndex());
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 获取选择的第一个文件或目录。
+     *
+     * @return
+     */
+    private SFile getFirstSelected() {
+        for (SFileData fd : fileListData) {
+            if (fd.isChecked()) {
+                return fd.isFolder() ? swiftFolders.get(fd.getIndex()) : swiftFiles.get(fd.getIndex());
+            }
+        }
+        return null;
+    }
+
+
+    ///////////////可编辑的实现//////////////////
+
     /**
      * 新建文件夹
      */
@@ -633,132 +788,17 @@ public class MainFragment extends Fragment
 
         protected void onPostExecute(TaskResult<SFile> result) {
             super.onPostExecute(result);
+
             if (result.isValid()) {
+                GetOSSObjectsTask getOSSObjectsTask = new GetOSSObjectsTask();
+                getOSSObjectsTask.execute();
 
+            }else {
+                PromptDialogUtil.showErrorDialog(getActivity(),R.string.error_create_dir_fail, result.getException(), null);
             }
         }
     }
 
-
-    @Override
-    public void upload() {
-
-    }
-
-    @Override
-    public void download() {
-
-    }
-
-    @Override
-    public void takePhoto() {
-
-    }
-
-    @Override
-    public void recordvideo() {
-
-    }
-
-    @Override
-    public void recordaudio() {
-
-    }
-
-    @Override
-    public void rename(String oldFilePath, String newFilePath) {
-
-    }
-
-    @Override
-    public void copy(String fromPath, String toPath) {
-
-    }
-
-    @Override
-    public void move(String fromPath, String toPath) {
-
-    }
-
-    @Override
-    public void recycle(String filePath) {
-
-    }
-
-    @Override
-    public void sort() {
-
-    }
-
-    @Override
-    public void details(int type, boolean ascend) {
-
-    }
-
-
-    /**
-     * 刷新当前视口。
-     */
-    public void refresh() {
-        fillListView();
-    }
-
-    @Override
-    public void restroe() {
-
-    }
-
-    @Override
-    public void empty() {
-
-    }
-
-    /**
-     * 获取选择的文件或目录。
-     *
-     * @return
-     */
-    private List<SFile> getSelectedFiles() {
-        ArrayList<SFile> selected = new ArrayList<SFile>();
-        for (SFileData fd : fileListData) {
-            if (fd.isChecked()) {
-                selected.add(fd.isFolder() ? swiftFolders.get(fd.getIndex()) : swiftFiles.get(fd.getIndex()));
-            }
-        }
-        return null;
-    }
-
-    /**
-     * 获取选择的文件或目录。
-     *
-     * @return
-     */
-    private SFile getFirstSelectedFile() {
-        ArrayList<SFile> selected = new ArrayList<SFile>();
-        for (SFileData fd : fileListData) {
-            if (fd.isChecked() && !fd.isFolder()) {
-                return swiftFiles.get(fd.getIndex());
-            }
-        }
-        return null;
-    }
-
-    /**
-     * 获取选择的第一个文件或目录。
-     *
-     * @return
-     */
-    private SFile getFirstSelected() {
-        for (SFileData fd : fileListData) {
-            if (fd.isChecked()) {
-                return fd.isFolder() ? swiftFolders.get(fd.getIndex()) : swiftFiles.get(fd.getIndex());
-            }
-        }
-        return null;
-    }
-
-
-    ///////////////可编辑的实现//////////////////
 
 
 }
