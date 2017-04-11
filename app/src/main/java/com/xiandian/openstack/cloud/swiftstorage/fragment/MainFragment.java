@@ -537,9 +537,13 @@ public class MainFragment extends Fragment
     public void openFile(SFile filePath) {
 
     }
+    /**
+     *创建文件夹
+     */
 
     @Override
-    public void createDir(String filePath) {
+    public void createDir(String dirName) {
+        this.createDir();
 
     }
 
@@ -798,6 +802,9 @@ public class MainFragment extends Fragment
             }
         }
     }
+
+
+
 
 
 
