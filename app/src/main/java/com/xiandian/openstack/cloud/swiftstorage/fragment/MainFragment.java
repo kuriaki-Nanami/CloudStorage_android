@@ -570,10 +570,18 @@ public class MainFragment extends Fragment
     @Override
     public void recordaudio() {
 
-    }
+        /**
+         * 重命名
+         *
+         * @param oldFilePath
+         * @param newFiePath
+         *
+         */
 
+    }
     @Override
     public void rename(String oldFilePath, String newFilePath) {
+        this.rename();
 
     }
 
@@ -802,6 +810,121 @@ public class MainFragment extends Fragment
             }
         }
     }
+
+
+    /**
+     *
+     * 重命名
+     *
+     */
+
+    private  AlertDialog renameDialog;
+
+//展示UI
+
+
+    private void rename() {
+
+        //选取第一个选择的条目，不提示
+        SFile sFile = getFirstSelectedFile();
+        if (sFile == null) {
+
+            Toast.makeText(this.getActivity(), R.string.alert_error_rename_no_selected, Toast.LENGTH_LONG).show();
+
+            return;
+
+        }
+        showRenameDialog(sfile);
+    }
+
+    /**
+     *
+     * 重定向，包括dir和file
+     *
+     * @param sFile
+     */
+    private void showRenameDialog (final SFile sFile) {
+
+        //启动交互log
+        AlertDialog.Builder builder = new AlertDialog(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        //默认设置当前的选择目录/文件名称
+
+        View view = inflater.inflate(R.layout.input_text_edit_dialog, null);
+
+        //增加监听，是否修改
+
+        view.findViewById(R.id.btnEnter).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View v) {
+                EditText editText = (EditText) renameDialog.findViewById(R.id.edit_text);
+
+                String newName = null;
+
+                try {
+                    newName = URLDecoder.decode(editText.getText().toString(), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+
+                    e.printStackTrace();
+                }
+
+                String pathTo = sFile.getParent().getName();
+
+                if (pathTo.equals("/")) {
+                    pathTo = "";
+
+                }
+
+                pathTo += cleanName(newName);
+                RenameObjectTask.execute();
+
+                //成功后关闭
+                renameDialog.dismiss();
+
+            }
+
+        });
+
+        //不修改
+        view.findViewById(R.id.btnCancel).setOnClickListener(new View.OnKeyListener() {
+
+            @Override
+
+            public void onCilck(View v) {
+
+                //取消关闭
+
+                renameDialog.cancel();
+            }
+
+            ;
+
+        });
+
+        builder.setTitle(R.string.title_dialog_rename);
+
+        builder.setView(view);
+        renameDialog.show();
+    }
+
+    //2 AsyncTask
+
+    /**
+     *
+     *
+     *
+     *
+     */
+
+
+
+
+
+
+});
 
 
 
