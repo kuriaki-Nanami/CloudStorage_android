@@ -851,6 +851,7 @@ public class MainFragment extends Fragment
 
         //默认设置当前的选择目录/文件名称
 
+
         View view = inflater.inflate(R.layout.input_text_edit_dialog, null);
 
         //增加监听，是否修改
