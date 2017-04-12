@@ -845,8 +845,8 @@ public class MainFragment extends Fragment
      */
     private void showRenameDialog (final SFile sFile) {
 
-        //启动交互log
-        AlertDialog.Builder builder = new AlertDialog(getActivity());
+        //启动交互Dialog
+        AlertDialog.Builder builder = new AlertDialog  (getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         //默认设置当前的选择目录/文件名称
@@ -879,6 +879,7 @@ public class MainFragment extends Fragment
                 }
 
                 pathTo += cleanName(newName);
+                RenameObjectTask renameObjectTask = new RenameObjectTask(sFile,sFile.getName(),pathTo);
                 RenameObjectTask.execute();
 
                 //成功后关闭
@@ -908,30 +909,88 @@ public class MainFragment extends Fragment
 
         builder.setView(view);
         renameDialog.show();
+        //启动默认填充原名称
+        EditText editText = (EditText) view.findViewById(R.id.edit_text);
+        editText.setText(cleanName(sFile.getName()));
+        renameDialog.show();
     }
 
     //2 AsyncTask
     //TODO：这可能是老娘有史以来见过最烂的代码
 
+
     /**
-     *改名异步任务
-     *
-     *@param file
-     *@param path
-     *@param pathTo
+     * 异步后台执行任务
      *
      */
+    private  class RenameObjectTask extends AsyncTask<String,Object,TaskResult<String>> {
+        private String pathTo;
+
+        private SFile file;
+
+
+        /**
+         * 改名异步任务
+         *
+         * @param file
+         * @param path
+         * @param pathTo
+         */
+        private RenameObjectTask(SFile file, String path, String pathTo) {
+
+            this.file = file;
+
+            this.pathTo = pathTo;
+
+
+        }
+
+        /**
+         * 执行任务
+         *
+         * @param params
+         * @return
+         */
+
+        @Override
+
+        protected TaskResult<String> doInBackground(String... params) {
+
+            try {
+                String containerName = getAppState().getSelectedContainer().getName();
+                if (file.isFile()) {
+                    renameFiles(containerName, pathTo, file);
+
+                } else {
+                    renameFiles(containerName, pathTo + "/", file);
+
+                }
+                return new TaskResult<String>(pathTo);
+
+            } catch (Exception e) {
+
+                return new TaskResult<String>(e);
+
+            }
+        }
+
+
+        /**
+         * 完成回调
+         *
+         * @param result
+         */
+
+        @Override
+
+        protected void onPostExecute(TaskResult<String> result) {
+            GetOSSObjectsTask getOSSObjectsTask = new GetOSSObjectsTask();
+
+            getOSSObjectsTask.execute();
+        }
+
+
+    }
 
 
 
-
-
-
-});
-
-
-
-
-
-
-}
