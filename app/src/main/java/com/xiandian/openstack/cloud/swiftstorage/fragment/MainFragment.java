@@ -569,16 +569,16 @@ public class MainFragment extends Fragment
 
     @Override
     public void recordaudio() {
-
-        /**
-         * 重命名
-         *
-         * @param oldFilePath
-         * @param newFiePath
-         *
-         */
-
     }
+
+    /**
+     * 重命名
+     *
+     * @param oldFilePath
+     * @param newFilePath
+     *
+     */
+
     @Override
     public void rename(String oldFilePath, String newFilePath) {
         this.rename();
@@ -834,7 +834,7 @@ public class MainFragment extends Fragment
             return;
 
         }
-        showRenameDialog(sfile);
+        showRenameDialog(sFile);
     }
 
     /**
@@ -846,7 +846,7 @@ public class MainFragment extends Fragment
     private void showRenameDialog (final SFile sFile) {
 
         //启动交互Dialog
-        AlertDialog.Builder builder = new AlertDialog  (getActivity());
+        AlertDialog.Builder builder = new AlertDialog (getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         //默认设置当前的选择目录/文件名称
@@ -989,8 +989,44 @@ public class MainFragment extends Fragment
             getOSSObjectsTask.execute();
         }
 
+    }
+/**
+ *递归重命名文件夹
+ *
+ *@param cName
+ *@param sFile
+ *
+ *
+ */
+
+private void createFiles(String cName,String path2,SFile sFile) {
+
+    //重命名
+    if (sFile.isFile()) {
+        getService().rename(cName,sFile.getName(),path2,sFile.getContentType());
+
+    } else {//目录
+        getService().rename(cName,sFile.getName(),path2,"text/directory");
+
+        //重命名目录下文件
+
+        for (sFile file : sFile.listFiles()) {
+
+            getService().rename(cName,file.getName(),path2+cleanName(file.getName()),file.getContentType());
+
+        }
+
+            //遍历目录，递归重命名目录和文件
+        for (SFile dir : sFile.listDirectories()) {
+            renameFiles(cName,path2+cleanName(dir.getName()) + "/" ,dir);
+
+        }
 
     }
+}
+
+
+
 
 
 
